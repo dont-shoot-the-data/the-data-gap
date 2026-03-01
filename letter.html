@@ -9,50 +9,138 @@
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background: #faf9f6;
+  background: #f5f0e8;
   color: #1a1a1a;
   font-family: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
   font-size: 16px;
   line-height: 1.85;
   -webkit-font-smoothing: antialiased;
+  /* Subtle linen/paper texture via SVG noise */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
 }
 
 ::selection {
-  background: #1a1a1a;
-  color: #faf9f6;
+  background: #2c1810;
+  color: #f5f0e8;
 }
 
+/* --- PAPER SHEET --- */
 .page {
-  max-width: 740px;
-  margin: 0 auto;
-  padding: 80px 40px 100px;
+  max-width: 860px;
+  margin: 40px auto;
+  padding: 80px 72px 100px;
+  background: #faf8f3;
+  position: relative;
+  box-shadow:
+    0 1px 3px rgba(0,0,0,0.04),
+    0 4px 12px rgba(0,0,0,0.03),
+    0 20px 60px rgba(0,0,0,0.06);
+  /* Inner glow to simulate light hitting cotton paper */
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255,255,255,0.6) 0%, transparent 60%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23p)' opacity='0.025'/%3E%3C/svg%3E");
 }
 
-/* --- HEADER --- */
+/* Deckled edge simulation - top */
+.page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(to right,
+    #8b7355 0%, #a08b6d 2%, #8b7355 4%, #9c8a6e 6%, #8b7355 8%,
+    #a08b6d 10%, #8b7355 15%, #9c8a6e 20%, #8b7355 25%,
+    #a08b6d 30%, #8b7355 40%, #9c8a6e 50%, #8b7355 60%,
+    #a08b6d 70%, #8b7355 80%, #9c8a6e 90%, #8b7355 100%);
+  opacity: 0.35;
+}
+
+/* Thin gold accent line */
+.page::after {
+  content: '';
+  position: absolute;
+  top: 12px; left: 48px; right: 48px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #b8a47e, #d4c4a0, #b8a47e, transparent);
+  opacity: 0.5;
+}
+
+/* --- STATIONERY HEADER --- */
 .letterhead {
   text-align: center;
   padding-bottom: 40px;
   margin-bottom: 40px;
-  border-bottom: 2px solid #1a1a1a;
+  position: relative;
+}
+
+.letterhead-rule {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.letterhead-rule::before,
+.letterhead-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #8b7355, transparent);
+}
+
+.letterhead-ornament {
+  font-size: 14px;
+  color: #b8a47e;
+  letter-spacing: 8px;
 }
 
 .letterhead h1 {
   font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
   text-transform: uppercase;
-  color: #1a1a1a;
-  margin-bottom: 16px;
+  color: #5a4a3a;
+  margin-bottom: 20px;
+  /* Embossed text effect */
+  text-shadow: 0 1px 0 rgba(255,255,255,0.7), 0 -1px 0 rgba(0,0,0,0.05);
 }
 
-.letterhead .re {
+.letterhead .subject {
   font-size: 15px;
   font-style: italic;
-  color: #444;
-  max-width: 560px;
+  color: #555;
+  max-width: 540px;
   margin: 0 auto;
-  line-height: 1.5;
+  line-height: 1.55;
+}
+
+.letterhead-bottom-rule {
+  width: 100%;
+  height: 1px;
+  margin-top: 32px;
+  background: linear-gradient(to right, transparent 5%, #8b7355 30%, #8b7355 70%, transparent 95%);
+  position: relative;
+}
+
+.letterhead-bottom-rule::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent 5%, rgba(255,255,255,0.5) 30%, rgba(255,255,255,0.5) 70%, transparent 95%);
+}
+
+/* --- THIN DECORATIVE BORDER --- */
+.paper-edge {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(to right, #8b7355, #b8a47e, #d4c4a0, #b8a47e, #8b7355);
+  z-index: 100;
 }
 
 .meta-block {
@@ -63,37 +151,51 @@ body {
 
 .meta-block .label {
   font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: #888;
-  margin-bottom: 2px;
+  color: #a09080;
+  margin-bottom: 4px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 
 .meta-block p {
   margin-bottom: 4px;
+  color: #333;
 }
 
 .meta-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 24px;
   margin-bottom: 40px;
   padding-bottom: 40px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd5c8;
+}
+
+.meta-date {
+  font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #a09080;
+  text-align: right;
+  margin-bottom: 20px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 
 /* --- SECTIONS --- */
 .section-number {
   font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: #999;
+  color: #b8a47e;
   margin-bottom: 6px;
   margin-top: 56px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 
 h2 {
@@ -101,6 +203,7 @@ h2 {
   font-weight: 700;
   margin-bottom: 20px;
   line-height: 1.35;
+  color: #2c1810;
 }
 
 h3 {
@@ -109,32 +212,38 @@ h3 {
   margin-top: 36px;
   margin-bottom: 14px;
   line-height: 1.4;
+  color: #3a2a1a;
 }
 
 p {
   margin-bottom: 16px;
   text-align: justify;
   hyphens: auto;
+  color: #333;
 }
 
 p strong {
   font-weight: 700;
+  color: #1a1a1a;
 }
 
 blockquote {
   margin: 28px 0 28px 28px;
-  padding: 0 0 0 20px;
-  border-left: 3px solid #1a1a1a;
+  padding: 20px 24px;
+  border-left: 3px solid #b8a47e;
+  background: linear-gradient(135deg, rgba(184,164,126,0.06), rgba(184,164,126,0.02));
+  border-radius: 0 4px 4px 0;
   font-style: italic;
-  color: #333;
+  color: #444;
 }
 
 blockquote .attribution {
   display: block;
   font-style: normal;
-  font-size: 13px;
-  color: #888;
-  margin-top: 8px;
+  font-size: 12px;
+  color: #a09080;
+  margin-top: 10px;
+  letter-spacing: 0.5px;
 }
 
 /* --- TABLES --- */
@@ -146,38 +255,39 @@ table {
 }
 
 thead {
-  border-bottom: 2px solid #1a1a1a;
+  border-bottom: 2px solid #8b7355;
 }
 
 th {
   font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  letter-spacing: 2px;
+  letter-spacing: 2.5px;
   text-transform: uppercase;
   text-align: left;
   padding: 10px 12px;
-  color: #555;
+  color: #8b7355;
 }
 
 th:not(:first-child) { text-align: right; }
 
 td {
-  padding: 8px 12px;
-  border-bottom: 1px solid #e5e5e5;
+  padding: 9px 12px;
+  border-bottom: 1px solid #e8e0d4;
+  color: #333;
 }
 
 td:not(:first-child) { text-align: right; }
 
-tr:last-child td { border-bottom: 2px solid #1a1a1a; }
+tr:last-child td { border-bottom: 2px solid #8b7355; }
 
 .table-caption {
   font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-  color: #888;
+  color: #a09080;
   margin-bottom: 8px;
 }
 
@@ -193,7 +303,8 @@ ol.asks li {
   counter-increment: asks;
   position: relative;
   padding: 14px 0 14px 48px;
-  border-bottom: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e8e0d4;
+  color: #333;
 }
 
 ol.asks li::before {
@@ -204,35 +315,49 @@ ol.asks li::before {
   font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
   font-size: 14px;
   font-weight: 700;
-  color: #999;
+  color: #b8a47e;
 }
 
 ol.asks li:last-child { border-bottom: none; }
 
 /* --- DIVIDER --- */
 .divider {
-  width: 60px;
-  height: 2px;
-  background: #1a1a1a;
-  margin: 56px 0;
+  width: 80px;
+  height: 1px;
+  margin: 56px auto;
+  background: linear-gradient(to right, transparent, #b8a47e, transparent);
+  position: relative;
+}
+
+.divider::before {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8px;
+  color: #b8a47e;
+  background: #faf8f3;
+  padding: 0 12px;
 }
 
 /* --- APPENDIX --- */
 .appendix {
   margin-top: 56px;
   padding-top: 40px;
-  border-top: 2px solid #1a1a1a;
+  border-top: 2px solid #8b7355;
 }
 
 .appendix h3 {
   font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  color: #888;
+  color: #a09080;
   margin-top: 0;
   margin-bottom: 20px;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
 
 .appendix ul {
@@ -242,32 +367,33 @@ ol.asks li:last-child { border-bottom: none; }
 
 .appendix li {
   padding: 8px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #e8e0d4;
   font-size: 14px;
   line-height: 1.6;
+  color: #444;
 }
 
 .appendix li:last-child { border-bottom: none; }
 
 .appendix a {
-  color: #1a1a1a;
+  color: #5a4a3a;
   text-decoration: none;
-  border-bottom: 1px solid #ccc;
-  transition: border-color 0.2s;
+  border-bottom: 1px solid #d4c4a0;
+  transition: border-color 0.2s, color 0.2s;
 }
 
-.appendix a:hover { border-color: #1a1a1a; }
+.appendix a:hover { color: #2c1810; border-color: #8b7355; }
 
 .source-note {
   font-size: 13px;
-  color: #888;
+  color: #a09080;
 }
 
 /* --- SIGNATURE BLOCK --- */
 .signature-block {
   margin-top: 56px;
   padding-top: 40px;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #ddd5c8;
   text-align: center;
   font-style: italic;
   color: #666;
@@ -277,66 +403,73 @@ ol.asks li:last-child { border-bottom: none; }
 .signature-line {
   width: 200px;
   height: 1px;
-  background: #ccc;
+  background: linear-gradient(to right, transparent, #b8a47e, transparent);
   margin: 40px auto 12px;
 }
 
 .back-link {
   display: inline-block;
   font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 600;
-  letter-spacing: 1px;
-  color: #888;
+  letter-spacing: 1.5px;
+  color: #a09080;
   text-decoration: none;
   margin-top: 60px;
   padding: 10px 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #ddd5c8;
   border-radius: 4px;
   transition: color 0.2s, border-color 0.2s;
 }
 
 .back-link:hover {
-  color: #1a1a1a;
-  border-color: #1a1a1a;
+  color: #5a4a3a;
+  border-color: #8b7355;
 }
 
 /* --- PRINT --- */
 @media print {
-  body { font-size: 11pt; }
-  .page { padding: 0; max-width: 100%; }
+  body { font-size: 11pt; background: white; }
+  .page { padding: 0; max-width: 100%; box-shadow: none; margin: 0; background: white; }
+  .page::before, .page::after { display: none; }
+  .paper-edge { display: none; }
   .back-link { display: none; }
+  .divider::before { background: white; }
 }
 
 @media (max-width: 600px) {
-  .page { padding: 40px 20px 60px; }
+  .page { padding: 40px 24px 60px; margin: 0; box-shadow: none; }
   .meta-row { grid-template-columns: 1fr; gap: 16px; }
   p { text-align: left; }
 }
 </style>
 </head>
 <body>
+<div class="paper-edge"></div>
 <div class="page">
 
   <div class="letterhead">
+    <div class="letterhead-rule">
+      <div class="letterhead-ornament">◆ ◆ ◆</div>
+    </div>
     <h1>Open Letter to the Federal Bureau of Investigation</h1>
-    <p class="re">RE: Urgent Need to Adopt Combined Race/Ethnicity Reporting in the Uniform Crime Report and National Incident-Based Reporting System</p>
+    <p class="subject">Urgent Need to Adopt Combined Race/Ethnicity Reporting in the Uniform Crime Report and National Incident-Based Reporting System</p>
+    <div class="letterhead-bottom-rule"></div>
   </div>
+
+  <div class="meta-date">March 2026</div>
 
   <div class="meta-row">
     <div class="meta-block">
       <div class="label">To</div>
       <p>The Honorable Director,<br>Federal Bureau of Investigation</p>
       <p>The CJIS Advisory Policy Board</p>
-      <p>The Criminal Justice Information<br>Services Division</p>
+      <p>The Criminal Justice Information Services Division</p>
     </div>
     <div class="meta-block">
       <div class="label">From</div>
-      <p>Concerned Researchers, Criminologists, Data Analysts, and Public Policy Advocates</p>
-    </div>
-    <div class="meta-block">
-      <div class="label">Date</div>
-      <p>March 2026</p>
+      <p><a href="https://github.com/dont-shoot-the-data" style="color:#2c1810; text-decoration:none; border-bottom:1px solid #d4c4a0;">dont-shoot-the-data</a></p>
+      <p>Independent Research</p>
     </div>
   </div>
 
@@ -499,9 +632,11 @@ ol.asks li:last-child { border-bottom: none; }
 
   <!-- SIGNATURE -->
   <div class="signature-block">
-    <p>This letter is intended for public distribution.<br>Signatories and endorsing organizations are listed below.</p>
+    <p>This letter is intended for public distribution and open endorsement.</p>
     <div class="signature-line"></div>
-    <p>[Signatories]</p>
+    <p style="font-style: normal; color: #2c1810;"><a href="https://github.com/dont-shoot-the-data" style="color:#2c1810; text-decoration:none; border-bottom:1px solid #d4c4a0;">dont-shoot-the-data</a></p>
+    <p>Independent Research</p>
+    <p style="margin-top: 24px; font-size: 13px;">If you are a researcher, journalist, data analyst, law enforcement professional, or policymaker who supports these recommendations, visit <a href="https://github.com/dont-shoot-the-data" style="color:#5a4a3a; border-bottom:1px solid #d4c4a0; text-decoration:none;">github.com/dont-shoot-the-data</a></p>
   </div>
 
   <!-- APPENDIX -->
