@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Data Gap — An Open Letter to the FBI</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0c;
+  --bg-elevated: #111116;
+  --bg-card: #16161c;
+  --border: #2a2a35;
+  --text: #e8e6e3;
+  --text-muted: #8a8898;
+  --text-dim: #5a5a6a;
+  --accent: #ff3b30;
+  --accent-glow: rgba(255, 59, 48, 0.15);
+  --blue: #3b82f6;
+  --green: #22c55e;
+  --amber: #f59e0b;
+  --white-bar: #94a3b8;
+  --hispanic-bar: #f59e0b;
+  --black-bar: #3b82f6;
+  --other-bar: #6b7280;
+  --serif: 'Playfair Display', Georgia, serif;
+  --mono: 'IBM Plex Mono', 'Courier New', monospace;
+  --sans: 'IBM Plex Sans', -apple-system, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--accent);
+  color: white;
+}
+
+/* --- HERO --- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 40%, rgba(255,59,48,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(59,130,246,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 32px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(42px, 7vw, 96px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  max-width: 900px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-family: var(--sans);
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 300;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin-top: 28px;
+  line-height: 1.6;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+.hero-meta {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  margin-top: 48px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1s;
+}
+
+.scroll-hint span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 1; }
+}
+
+/* --- LAYOUT --- */
+.container {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.wide-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+section {
+  padding: 100px 0;
+}
+
+section + section {
+  border-top: 1px solid var(--border);
+}
+
+/* --- TYPOGRAPHY --- */
+h2 {
+  font-family: var(--serif);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+h3 {
+  font-family: var(--sans);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+p {
+  margin-bottom: 20px;
+  color: var(--text-muted);
+}
+
+p strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.lead {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* --- STAT CALLOUTS --- */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin: 48px 0;
+}
+
+.stat-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.stat-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.stat-number {
+  font-family: var(--mono);
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.stat-number.blue { color: var(--blue); }
+.stat-number.amber { color: var(--amber); }
+.stat-number.green { color: var(--green); }
+
+.stat-label {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* --- BLOCKQUOTE --- */
+blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--accent-glow);
+  padding: 24px 28px;
+  margin: 32px 0;
+  border-radius: 0 8px 8px 0;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+blockquote .source {
+  display: block;
+  margin-top: 12px;
+  font-size: 11px;
+  color: var(--text-dim);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* --- CHART SECTIONS --- */
+.chart-section {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 40px;
+  margin: 48px 0;
+}
+
+.chart-title {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+
+.chart-subtitle {
+  font-family: var(--serif);
+  font-size: 22px;
+  color: var(--text);
+  margin-bottom: 32px;
+}
+
+/* BAR CHARTS */
+.bar-group {
+  margin-bottom: 28px;
+}
+
+.bar-group-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 12px;
+}
+
+.bar-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 12px;
+}
+
+.bar-label {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  width: 100px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.bar-track {
+  flex: 1;
+  height: 28px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  position: relative;
+  transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  width: 0;
+}
+
+.bar-fill.animated { /* JS triggers */ }
+
+.bar-fill.white { background: var(--white-bar); }
+.bar-fill.hispanic { background: var(--hispanic-bar); }
+.bar-fill.black { background: var(--black-bar); }
+.bar-fill.other { background: var(--other-bar); }
+.bar-fill.red { background: var(--accent); }
+
+.bar-value {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  width: 52px;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+/* COMPARISON CHART */
+.comparison {
+  display: grid;
+  grid-template-columns: 1fr 60px 1fr;
+  gap: 0;
+  align-items: start;
+  margin-top: 32px;
+}
+
+.comparison-col {
+  padding: 0 20px;
+}
+
+.comparison-divider {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.comparison-divider .vs {
+  font-family: var(--serif);
+  font-size: 18px;
+  font-style: italic;
+  color: var(--text-dim);
+}
+
+.comparison-divider .line {
+  width: 1px;
+  height: 200px;
+  background: var(--border);
+  margin-top: 12px;
+}
+
+.comparison-header {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+.comparison-title {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--text);
+  margin-bottom: 24px;
+}
+
+.comparison .bar-label { width: 80px; font-size: 12px; }
+.comparison .bar-value { font-size: 12px; width: 44px; }
+.comparison .bar-track { height: 22px; }
+
+/* --- HIGHLIGHT BOX --- */
+.highlight-box {
+  background: linear-gradient(135deg, rgba(255,59,48,0.08), rgba(255,59,48,0.02));
+  border: 1px solid rgba(255,59,48,0.2);
+  border-radius: 12px;
+  padding: 32px;
+  margin: 40px 0;
+}
+
+.highlight-box p {
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+/* --- THE BIG NUMBER --- */
+.big-reveal {
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+}
+
+.big-reveal::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 400px; height: 400px;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255,59,48,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  animation: heartGlow 3s ease-in-out infinite;
+}
+
+@keyframes heartGlow {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+  15% { transform: translate(-50%, -50%) scale(1.15); opacity: 1; }
+  30% { transform: translate(-50%, -50%) scale(1.05); opacity: 0.8; }
+  45% { transform: translate(-50%, -50%) scale(1.12); opacity: 1; }
+  60% { transform: translate(-50%, -50%) scale(1); opacity: 0.6; }
+}
+
+.big-number {
+  font-family: var(--mono);
+  font-size: clamp(64px, 12vw, 140px);
+  font-weight: 600;
+  color: var(--accent);
+  line-height: 1;
+  position: relative;
+}
+
+.big-caption {
+  font-family: var(--sans);
+  font-size: 18px;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 20px auto 0;
+}
+
+/* --- ASKS SECTION --- */
+.ask-list {
+  counter-reset: asks;
+  list-style: none;
+  margin: 40px 0;
+}
+
+.ask-item {
+  counter-increment: asks;
+  display: flex;
+  gap: 20px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.ask-item::before {
+  content: counter(asks, decimal-leading-zero);
+  font-family: var(--mono);
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--accent);
+  flex-shrink: 0;
+  width: 48px;
+  line-height: 1.2;
+}
+
+.ask-item p {
+  color: var(--text);
+  margin-bottom: 0;
+}
+
+.ask-item strong {
+  color: white;
+}
+
+/* --- FOOTNOTE COMPARISON --- */
+.footnote-demo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 40px 0;
+}
+
+.footnote-card {
+  border-radius: 12px;
+  padding: 28px;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.footnote-card.bad {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.footnote-card.good {
+  background: rgba(34,197,94,0.06);
+  border: 1px solid rgba(34,197,94,0.25);
+  color: var(--text);
+}
+
+.footnote-card .tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  margin-bottom: 14px;
+}
+
+.footnote-card.bad .tag {
+  background: rgba(255,59,48,0.1);
+  color: var(--accent);
+}
+
+.footnote-card.good .tag {
+  background: rgba(34,197,94,0.1);
+  color: var(--green);
+}
+
+/* --- STACKED BAR --- */
+.stacked-demo {
+  margin: 40px 0;
+}
+
+.stacked-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.stacked-label-row span {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.stacked-bar {
+  height: 48px;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  margin-bottom: 4px;
+}
+
+.stacked-segment {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: rgba(0,0,0,0.7);
+  transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.stacked-segment.white-seg { background: var(--white-bar); }
+.stacked-segment.hispanic-seg { background: var(--amber); }
+.stacked-segment.black-seg { background: var(--blue); color: white; }
+.stacked-segment.other-seg { background: var(--other-bar); }
+
+.stacked-legend {
+  display: flex;
+  gap: 20px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* --- CTA --- */
+.cta-section {
+  text-align: center;
+  padding: 100px 24px;
+  position: relative;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,59,48,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-section h2 {
+  max-width: 700px;
+  margin: 0 auto 20px;
+}
+
+.cta-section p {
+  max-width: 600px;
+  margin: 0 auto 16px;
+}
+
+/* --- FOOTER --- */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 60px 24px;
+  text-align: center;
+}
+
+footer p {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+footer a {
+  color: var(--text-muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+footer a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* --- LINK STYLES --- */
+a.source-link {
+  color: var(--text-dim);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-decoration: none;
+  border-bottom: 1px dotted var(--text-dim);
+  transition: color 0.2s;
+}
+
+a.source-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* --- AUDIO TOGGLE --- */
+#audio-toggle {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 40px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+#audio-toggle:hover {
+  border-color: var(--accent);
+}
+
+#audio-toggle.active {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px rgba(255,59,48,0.15);
+}
+
+#audio-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  transition: color 0.3s;
+}
+
+#audio-toggle.active #audio-label {
+  color: var(--accent);
+}
+
+.eq-bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 16px;
+}
+
+.eq-bar {
+  width: 3px;
+  background: var(--accent);
+  border-radius: 1px;
+  animation-play-state: paused;
+}
+
+.eq-bar:nth-child(1) { height: 4px; animation: eqBounce 0.8s ease infinite alternate; }
+.eq-bar:nth-child(2) { height: 8px; animation: eqBounce 0.6s ease infinite alternate 0.1s; }
+.eq-bar:nth-child(3) { height: 14px; animation: eqBounce 0.7s ease infinite alternate 0.2s; }
+.eq-bar:nth-child(4) { height: 6px; animation: eqBounce 0.5s ease infinite alternate 0.15s; }
+.eq-bar:nth-child(5) { height: 10px; animation: eqBounce 0.9s ease infinite alternate 0.05s; }
+
+@keyframes eqBounce {
+  0% { height: 3px; }
+  100% { height: 16px; }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+  .footnote-demo { grid-template-columns: 1fr; }
+  .comparison { grid-template-columns: 1fr; }
+  .comparison-divider { 
+    flex-direction: row; 
+    padding: 20px 0;
+    gap: 12px;
+  }
+  .comparison-divider .line {
+    width: 100px; height: 1px; margin: 0;
+  }
+  .stat-row { grid-template-columns: 1fr; }
+  .chart-section { padding: 24px; }
+  section { padding: 60px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- AUDIO TOGGLE -->
+<button id="audio-toggle" aria-label="Toggle ambient audio">
+  <div class="eq-bars">
+    <div class="eq-bar"></div>
+    <div class="eq-bar"></div>
+    <div class="eq-bar"></div>
+    <div class="eq-bar"></div>
+    <div class="eq-bar"></div>
+  </div>
+  <span id="audio-label">SOUND OFF</span>
+</button>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-label">An Open Letter to the FBI</div>
+  <h1>The Data <em>Gap</em></h1>
+  <p class="hero-sub">The FBI's crime statistics systematically obscure Hispanic involvement in violent crime, inflate the "White" crime rate, and produce national data that is structurally misleading. Here's the evidence — and what needs to change.</p>
+  <div class="hero-meta">Addressed to the CJIS Division &nbsp;·&nbsp; The CJIS Advisory Policy Board &nbsp;·&nbsp; The Director of the FBI</div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</header>
+
+<!-- ============ THE PROBLEM ============ -->
+<section>
+  <div class="container">
+    <h3>Section I</h3>
+    <h2>The system is broken by design</h2>
+    <p class="lead">The FBI collects race and ethnicity as <strong>two separate data fields</strong> from <strong>two different pools of agencies</strong>. When a Hispanic individual is arrested, they are coded as "White" in the race field and "Hispanic" in the ethnicity field. When the FBI publishes the data, these two fields cannot be cross-referenced.</p>
+
+    <p>Under the legacy "Crime in the United States" publications (through 2019), the most widely cited table was <strong>Table 43A</strong> — "Arrests by Race and Ethnicity." Its own footnote admitted the problem:</p>
+
+    <blockquote>
+      "The ethnicity totals are representative of those agencies that provided ethnicity breakdowns. Not all agencies provide ethnicity data; therefore, the race and ethnicity totals will not equal."
+      <span class="source">— FBI Table 43A, Footnote 2</span>
+    </blockquote>
+
+    <p>In plain language: the race column and the ethnicity column come from <strong>different sets of police departments</strong>. You cannot subtract one from the other. The math doesn't work because the denominators are different.</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-number">3,650</div>
+        <div class="stat-label">"White" murder arrests<br>Race column, 2019</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number amber">1,341</div>
+        <div class="stat-label">Hispanic murder arrests<br>Ethnicity column, 2019</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" style="color: var(--text-dim);">???</div>
+        <div class="stat-label">Non-Hispanic White<br>murder arrests — unknowable</div>
+      </div>
+    </div>
+
+    <p>The instinct is to subtract: 3,650 − 1,341 = 2,309 non-Hispanic White murder arrests. <strong>This calculation is invalid.</strong> The 3,650 and the 1,341 represent overlapping but non-identical groups of agencies. The actual number of non-Hispanic White murder arrests in the United States in 2019 is unknowable from published FBI data.</p>
+  </div>
+</section>
+
+<!-- ============ CDE SECTION ============ -->
+<section>
+  <div class="container">
+    <h3>Section II</h3>
+    <h2>The Crime Data Explorer made it worse</h2>
+
+    <p>When the FBI retired the numbered table format and launched the <strong>Crime Data Explorer</strong> as its primary public interface, the underlying data problem was not fixed — it was buried deeper.</p>
+
+    <p>The CDE presents race and ethnicity on <strong>separate tabs</strong>. A user researching homicide offenders clicks the "Race" tab and sees one set of numbers. To find Hispanic data, they must separately click the "Ethnicity" tab — with no indication that the two datasets may come from different agency pools or that the "White" figure on the Race tab includes Hispanic individuals.</p>
+
+    <div class="footnote-demo">
+      <div class="footnote-card bad">
+        <div class="tag">What users see</div>
+        <strong>Race Tab:</strong><br>
+        White ······ 45.8%<br>
+        Black ······ 51.2%<br>
+        Other ······ 3.0%<br><br>
+        <span style="color: var(--text-dim);">No mention that "White" includes Hispanic individuals. No link to Ethnicity tab. No footnote visible.</span>
+      </div>
+      <div class="footnote-card good">
+        <div class="tag">What users should see</div>
+        <strong>Combined Category:</strong><br>
+        Hispanic ···· 20.7%<br>
+        White (NH) ·· 25.1%<br>
+        Black ········ 51.2%<br>
+        Other ········ 3.0%<br><br>
+        <span style="color: var(--green);">⚠ Clear, honest, from the same agencies.</span>
+      </div>
+    </div>
+
+    <p>Under the old Table 43A, at least the two columns appeared on the same page and the footnote was visible. The CDE's tabbed interface eliminates even that minimal transparency.</p>
+
+    <p><a class="source-link" href="https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend" target="_blank">→ See the Crime Data Explorer for yourself</a></p>
+  </div>
+</section>
+
+<!-- ============ ETHNICITY GAP ============ -->
+<section>
+  <div class="container">
+    <h3>Section III</h3>
+    <h2>18.7% of murder arrests have no ethnicity data at all</h2>
+
+    <p>The race column of Table 43A reported <strong>7,964</strong> total murder arrests in 2019. The ethnicity column reported only <strong>6,474</strong>. That's a gap of 1,490 arrests — nearly one in five — with <strong>no ethnicity information whatsoever</strong>.</p>
+
+    <div class="chart-section">
+      <div class="chart-title">FBI Table 43A, 2019</div>
+      <div class="chart-subtitle">Murder arrests: Race total vs. Ethnicity total</div>
+
+      <div class="stacked-demo">
+        <div class="stacked-label-row">
+          <span>Race column — 7,964 arrests</span>
+          <span>100% reported</span>
+        </div>
+        <div class="stacked-bar">
+          <div class="stacked-segment white-seg" style="width: 45.8%;">45.8%</div>
+          <div class="stacked-segment black-seg" style="width: 51.2%;">51.2%</div>
+          <div class="stacked-segment other-seg" style="width: 3%;">3%</div>
+        </div>
+        <div class="stacked-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--white-bar)"></div> "White" (includes Hispanic)</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--blue)"></div> Black</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--other-bar)"></div> Other</div>
+        </div>
+      </div>
+
+      <div class="stacked-demo" style="margin-top: 32px;">
+        <div class="stacked-label-row">
+          <span>Ethnicity column — 6,474 arrests</span>
+          <span style="color: var(--accent);">18.7% missing</span>
+        </div>
+        <div class="stacked-bar">
+          <div class="stacked-segment hispanic-seg" style="width: 16.8%;">20.7%</div>
+          <div class="stacked-segment" style="width: 64.5%; background: #475569; color: white;">79.3%</div>
+          <div class="stacked-segment" style="width: 18.7%; background: repeating-linear-gradient(45deg, #1a1a24, #1a1a24 4px, #252530 4px, #252530 8px); color: var(--accent); font-size: 10px;">NO DATA</div>
+        </div>
+        <div class="stacked-legend">
+          <div class="legend-item"><div class="legend-dot" style="background:var(--amber)"></div> Hispanic</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#475569"></div> Not Hispanic</div>
+          <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div> Not reported</div>
+        </div>
+      </div>
+    </div>
+
+    <p>The result is a national crime dataset in which the "White" rate is inflated, the Hispanic rate is invisible, and the non-Hispanic White rate cannot be calculated. This is the data that researchers cite, journalists quote, and policymakers use to allocate resources.</p>
+  </div>
+</section>
+
+<!-- ============ THE EVIDENCE ============ -->
+<section>
+  <div class="wide-container">
+    <div class="container">
+      <h3>Section IV</h3>
+      <h2>What happens when you separate the data</h2>
+      <p class="lead">The strongest argument for change is empirical. Multiple major jurisdictions already report Hispanic as a distinct category. When they do, the numbers tell a fundamentally different story.</p>
+    </div>
+
+    <!-- NYC -->
+    <div class="chart-section" style="margin-top: 48px;">
+      <div class="chart-title">New York City Police Department, 2020</div>
+      <div class="chart-subtitle">Murder & Non-Negligent Manslaughter — Arrestees by Race/Ethnicity</div>
+
+      <div class="bar-group">
+        <div class="bar-row">
+          <div class="bar-label">Black</div>
+          <div class="bar-track"><div class="bar-fill black" data-width="60.2"></div></div>
+          <div class="bar-value">60.2%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Hispanic</div>
+          <div class="bar-track"><div class="bar-fill hispanic" data-width="32.1"></div></div>
+          <div class="bar-value">32.1%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">White</div>
+          <div class="bar-track"><div class="bar-fill white" data-width="3.6"></div></div>
+          <div class="bar-value">3.6%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Asian/PI</div>
+          <div class="bar-track"><div class="bar-fill other" data-width="4.1"></div></div>
+          <div class="bar-value">4.1%</div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Under the FBI's system, the 32.1% Hispanic share would be absorbed into "White" — inflating the White figure from 3.6% to approximately 35.7%.</strong> That's a nearly tenfold distortion.</p>
+      </div>
+
+      <a class="source-link" href="https://www.nyc.gov/assets/nypd/downloads/pdf/analysis_and_planning/year-end-2020-enforcement-report-20210721.pdf" target="_blank">→ NYPD Year-End 2020 Enforcement Report (PDF)</a>
+    </div>
+
+    <!-- CALIFORNIA -->
+    <div class="chart-section">
+      <div class="chart-title">California Department of Justice, 2024</div>
+      <div class="chart-subtitle">Homicide Felony Arrests — Table 31, by Race/Ethnic Group</div>
+
+      <div class="bar-group">
+        <div class="bar-row">
+          <div class="bar-label">Hispanic</div>
+          <div class="bar-track"><div class="bar-fill hispanic" data-width="48.2"></div></div>
+          <div class="bar-value">48.2%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Black</div>
+          <div class="bar-track"><div class="bar-fill black" data-width="29.8"></div></div>
+          <div class="bar-value">29.8%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">White</div>
+          <div class="bar-track"><div class="bar-fill white" data-width="16.2"></div></div>
+          <div class="bar-value">16.2%</div>
+        </div>
+        <div class="bar-row">
+          <div class="bar-label">Other</div>
+          <div class="bar-track"><div class="bar-fill other" data-width="5.7"></div></div>
+          <div class="bar-value">5.7%</div>
+        </div>
+      </div>
+
+      <div class="highlight-box">
+        <p><strong>Under the FBI's system, California's "White" figure would absorb the entire Hispanic total — producing a combined "White" figure of 64.4%.</strong> A number that bears no resemblance to reality and would wildly misrepresent homicide offending in the state.</p>
+      </div>
+
+      <a class="source-link" href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Crime%20In%20CA%202024%20final.pdf" target="_blank">→ Crime in California 2024, CA Dept. of Justice (PDF)</a>
+    </div>
+
+    <!-- THE BIG REVEAL -->
+    <div class="big-reveal">
+      <div class="big-number">~10×</div>
+      <div class="big-caption">The FBI's coding system can inflate the "White" share of murder arrests by as much as <strong>ten times</strong> the actual non-Hispanic White rate, depending on jurisdiction.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OMB ============ -->
+<section>
+  <div class="container">
+    <h3>Section V</h3>
+    <h2>The federal government already mandated this change</h2>
+
+    <p class="lead">On March 28, 2024, the Office of Management and Budget revised Statistical Policy Directive No. 15 — the first major update since 1997. The new standard requires all federal agencies to adopt a combined race/ethnicity question by <strong>September 2029</strong>.</p>
+
+    <p>The OMB made this change because its own research confirmed the two-question format was failing. In the 2020 Census, <strong>over 43% of Hispanic respondents</strong> either did not answer the race question or selected "Some Other Race." The SOR population surged 129% between 2010 and 2020, surpassing the Black/African American population — driven almost entirely by Hispanic respondents who could not find themselves in the categories offered.</p>
+
+    <div class="stat-row">
+      <div class="stat-card">
+        <div class="stat-number green">7</div>
+        <div class="stat-label">New minimum reporting<br>categories (up from 5)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number amber">1</div>
+        <div class="stat-label">Combined question<br>replacing two separate fields</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number blue">2029</div>
+        <div class="stat-label">Federal compliance<br>deadline (September)</div>
+      </div>
+    </div>
+
+    <p>The revised minimum reporting categories are: <strong>American Indian or Alaska Native, Asian, Black or African American, Hispanic or Latino, Middle Eastern or North African, Native Hawaiian or Pacific Islander,</strong> and <strong>White</strong>.</p>
+
+    <p>The FBI, as a federal agency, is bound by SPD 15. The question is not <em>whether</em> the FBI will adopt combined reporting, but <em>when</em> — and whether it will act with urgency or wait until the deadline while continuing to publish misleading data.</p>
+
+    <p><a class="source-link" href="https://www.federalregister.gov/documents/2024/03/29/2024-06469/revisions-to-ombs-statistical-policy-directive-no-15-standards-for-maintaining-collecting-and" target="_blank">→ OMB Revised SPD 15, Federal Register (March 29, 2024)</a></p>
+  </div>
+</section>
+
+<!-- ============ COST ============ -->
+<section>
+  <div class="container">
+    <h3>Section VI</h3>
+    <h2>The cost of inaction</h2>
+
+    <p class="lead">Every year the FBI publishes crime data under the old framework, the following harms compound.</p>
+
+    <div style="margin: 40px 0;">
+      <div class="ask-item" style="display:flex; gap:20px; padding:24px 0; border-bottom:1px solid var(--border);">
+        <div style="font-family:var(--serif); font-size:24px; color:var(--accent); width:48px; flex-shrink:0;">R</div>
+        <div>
+          <p style="color:var(--text);margin-bottom:0;"><strong>Researchers</strong> cannot isolate Hispanic crime rates at the national level. Studies using the subtraction method introduce systematic error. Decades of peer-reviewed criminological literature are built on data that conflates two distinct populations.</p>
+        </div>
+      </div>
+      <div class="ask-item" style="display:flex; gap:20px; padding:24px 0; border-bottom:1px solid var(--border);">
+        <div style="font-family:var(--serif); font-size:24px; color:var(--accent); width:48px; flex-shrink:0;">J</div>
+        <div>
+          <p style="color:var(--text);margin-bottom:0;"><strong>Journalists</strong> reporting on crime operate with data that makes it impossible to accurately describe who is committing and experiencing violence. This fuels both underreaction and overreaction — because the numbers are wrong.</p>
+        </div>
+      </div>
+      <div class="ask-item" style="display:flex; gap:20px; padding:24px 0; border-bottom:1px solid var(--border);">
+        <div style="font-family:var(--serif); font-size:24px; color:var(--accent); width:48px; flex-shrink:0;">P</div>
+        <div>
+          <p style="color:var(--text);margin-bottom:0;"><strong>Policymakers</strong> deciding law enforcement funding, violence intervention programs, and community investment are working with data that cannot tell them which communities are most affected. Resources flow to the wrong places.</p>
+        </div>
+      </div>
+      <div class="ask-item" style="display:flex; gap:20px; padding:24px 0; border-bottom:1px solid var(--border);">
+        <div style="font-family:var(--serif); font-size:24px; color:var(--accent); width:48px; flex-shrink:0;">C</div>
+        <div>
+          <p style="color:var(--text);margin-bottom:0;"><strong>Communities</strong> are harmed on both sides. Hispanic communities experiencing disproportionate violence are statistically invisible. Non-Hispanic White communities are statistically burdened with crime rates that are not theirs. Neither is served.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE ASKS ============ -->
+<section>
+  <div class="container">
+    <h3>Section VII</h3>
+    <h2>What we are asking</h2>
+
+    <ol class="ask-list">
+      <li class="ask-item">
+        <p><strong>Publish an implementation timeline</strong> for adopting OMB's revised SPD 15 standards in the UCR and NIBRS, consistent with the September 2029 federal deadline.</p>
+      </li>
+      <li class="ask-item">
+        <p><strong>Prioritize the combined race/ethnicity question</strong> in NIBRS data collection, ensuring that participating agencies code Hispanic/Latino as a co-equal racial/ethnic category.</p>
+      </li>
+      <li class="ask-item">
+        <p><strong>Publish bridging tables</strong> that allow researchers to compare historical data collected under the old framework with data collected under the new combined framework.</p>
+      </li>
+      <li class="ask-item">
+        <p><strong>Immediately begin publishing supplemental tables</strong> that present violent crime data with Hispanic/Latino as a separate category — even before full implementation — using agencies that already report complete ethnicity data.</p>
+      </li>
+      <li class="ask-item">
+        <p><strong>Consult with state-level agencies</strong> that have already adopted combined reporting — including the California Department of Justice and the New York City Police Department — to draw on decades of implementation experience.</p>
+      </li>
+      <li class="ask-item">
+        <p><strong>Disclose the limitation on the Race tab itself</strong> within the Crime Data Explorer interface. Users should see — without navigating to a separate page — that "White" includes Hispanic individuals and that race and ethnicity data may represent different agency pools.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ CLOSING ============ -->
+<section class="cta-section">
+  <div class="container">
+    <h2>The FBI's crime data is the most cited source on crime in the United States. Right now, it is systematically wrong about the nation's largest ethnic minority.</h2>
+    <p>The OMB has determined the two-question framework is broken. The largest state and the largest city already report with Hispanic separated. The federal mandate is in place. The path is clear.</p>
+    <p style="color: var(--text); font-weight: 500;">What remains is the will to act — and the urgency to act now, not in 2029.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="container">
+    <p style="margin-bottom: 16px;">This letter is intended for public distribution.</p>
+    <p style="margin-bottom: 24px;">
+      Sources:&nbsp;
+      <a href="https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-43" target="_blank">FBI Table 43A (2019)</a> · 
+      <a href="https://cde.ucr.cjis.gov/LATEST/webapp/#/pages/explorer/crime/crime-trend" target="_blank">FBI Crime Data Explorer</a> · 
+      <a href="https://www.nyc.gov/assets/nypd/downloads/pdf/analysis_and_planning/year-end-2020-enforcement-report-20210721.pdf" target="_blank">NYPD Report (2020)</a> · 
+      <a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Crime%20In%20CA%202024%20final.pdf" target="_blank">CA DOJ (2024)</a> · 
+      <a href="https://www.federalregister.gov/documents/2024/03/29/2024-06469/revisions-to-ombs-statistical-policy-directive-no-15-standards-for-maintaining-collecting-and" target="_blank">OMB SPD 15 (2024)</a> · 
+      <a href="https://www.census.gov/newsroom/blogs/random-samplings/2024/04/updates-race-ethnicity-standards.html" target="_blank">Census Bureau</a>
+    </p>
+    <p style="color: var(--text-dim); font-size: 11px;">March 2026</p>
+  </div>
+</footer>
+
+<script>
+// ============ AMBIENT AUDIO ENGINE ============
+class AmbientDrone {
+  constructor() {
+    this.ctx = null;
+    this.playing = false;
+    this.nodes = [];
+    this.masterGain = null;
+  }
+
+  init() {
+    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+    this.masterGain = this.ctx.createGain();
+    this.masterGain.gain.value = 0;
+    this.masterGain.connect(this.ctx.destination);
+
+    // Layer 1: Deep sub drone
+    this.createOsc(55, 'sine', 0.18);       // A1
+    this.createOsc(55.5, 'sine', 0.12);     // Slight detune for beating
+    
+    // Layer 2: Dark fifth
+    this.createOsc(82.4, 'sine', 0.08);     // E2
+    this.createOsc(82.7, 'sine', 0.06);     // Detuned
+
+    // Layer 3: Filtered noise bed
+    this.createFilteredNoise(200, 0.04);
+    this.createFilteredNoise(800, 0.015);
+
+    // Layer 4: High eerie harmonics
+    this.createOsc(440, 'sine', 0.012);
+    this.createOsc(554.37, 'sine', 0.008);  // C#5 - minor third tension
+    this.createOsc(659.25, 'triangle', 0.006); // E5
+
+    // Layer 5: Very slow LFO modulating volume for breathing effect
+    this.createLFO(0.05, this.masterGain.gain, 0.03);
+
+    // Layer 6: Intermittent low pulse
+    this.createPulse();
+  }
+
+  createOsc(freq, type, vol) {
+    const osc = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    gain.gain.value = vol;
+    osc.connect(gain);
+    gain.connect(this.masterGain);
+    osc.start();
+    this.nodes.push({ osc, gain });
+
+    // Slow random drift on frequency
+    const drift = () => {
+      if (!this.playing) return;
+      const target = freq + (Math.random() - 0.5) * 1.5;
+      osc.frequency.linearRampToValueAtTime(target, this.ctx.currentTime + 4);
+      setTimeout(drift, 3000 + Math.random() * 5000);
+    };
+    drift();
+  }
+
+  createFilteredNoise(cutoff, vol) {
+    const bufferSize = 2 * this.ctx.sampleRate;
+    const buffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    const noise = this.ctx.createBufferSource();
+    noise.buffer = buffer;
+    noise.loop = true;
+
+    const filter = this.ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = cutoff;
+    filter.Q.value = 1.5;
+
+    const gain = this.ctx.createGain();
+    gain.gain.value = vol;
+
+    noise.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.masterGain);
+    noise.start();
+
+    // Slow filter sweep
+    const sweep = () => {
+      if (!this.playing) return;
+      const target = cutoff * (0.5 + Math.random());
+      filter.frequency.linearRampToValueAtTime(target, this.ctx.currentTime + 8);
+      setTimeout(sweep, 6000 + Math.random() * 8000);
+    };
+    sweep();
+  }
+
+  createLFO(rate, param, depth) {
+    const lfo = this.ctx.createOscillator();
+    const lfoGain = this.ctx.createGain();
+    lfo.type = 'sine';
+    lfo.frequency.value = rate;
+    lfoGain.gain.value = depth;
+    lfo.connect(lfoGain);
+    lfoGain.connect(param);
+    lfo.start();
+  }
+
+  createPulse() {
+    const pulse = () => {
+      if (!this.playing) return;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.value = 36 + Math.random() * 10; // Deep rumble
+      gain.gain.value = 0;
+      gain.gain.linearRampToValueAtTime(0.08, this.ctx.currentTime + 2);
+      gain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + 6);
+      osc.connect(gain);
+      gain.connect(this.masterGain);
+      osc.start();
+      osc.stop(this.ctx.currentTime + 6.5);
+      setTimeout(pulse, 8000 + Math.random() * 15000);
+    };
+    setTimeout(pulse, 3000);
+  }
+
+  fadeIn(duration = 4) {
+    if (!this.ctx) this.init();
+    this.playing = true;
+    this.masterGain.gain.linearRampToValueAtTime(1, this.ctx.currentTime + duration);
+  }
+
+  fadeOut(duration = 2) {
+    this.playing = false;
+    if (this.masterGain) {
+      this.masterGain.gain.linearRampToValueAtTime(0, this.ctx.currentTime + duration);
+    }
+  }
+
+  toggle() {
+    if (this.playing) {
+      this.fadeOut();
+    } else {
+      this.fadeIn();
+    }
+    return this.playing;
+  }
+}
+
+const drone = new AmbientDrone();
+
+// Audio toggle button
+const audioBtn = document.getElementById('audio-toggle');
+const audioLabel = document.getElementById('audio-label');
+const bars = audioBtn.querySelectorAll('.eq-bar');
+
+audioBtn.addEventListener('click', () => {
+  const isPlaying = drone.toggle();
+  audioLabel.textContent = isPlaying ? 'SOUND ON' : 'SOUND OFF';
+  audioBtn.classList.toggle('active', isPlaying);
+  bars.forEach(bar => {
+    bar.style.animationPlayState = isPlaying ? 'running' : 'paused';
+  });
+});
+
+// Scroll-reactive audio intensity
+const sections = document.querySelectorAll('section');
+const bigReveal = document.querySelector('.big-reveal');
+
+const intensityObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!drone.playing || !drone.masterGain) return;
+    if (entry.isIntersecting) {
+      // Intensify on data-heavy sections
+      if (entry.target.querySelector('.chart-section') || entry.target.querySelector('.big-reveal')) {
+        drone.masterGain.gain.linearRampToValueAtTime(1.4, drone.ctx.currentTime + 2);
+      }
+      // Peak intensity on the 10x reveal
+      if (entry.target.querySelector('.big-number')) {
+        drone.masterGain.gain.linearRampToValueAtTime(1.8, drone.ctx.currentTime + 1);
+      }
+    } else {
+      if (drone.playing) {
+        drone.masterGain.gain.linearRampToValueAtTime(1, drone.ctx.currentTime + 3);
+      }
+    }
+  });
+}, { threshold: 0.5 });
+
+sections.forEach(s => intensityObserver.observe(s));
+
+// Animate bars on scroll
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const bars = entry.target.querySelectorAll('.bar-fill[data-width]');
+      bars.forEach((bar, i) => {
+        setTimeout(() => {
+          bar.style.width = bar.dataset.width + '%';
+        }, i * 100);
+      });
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+document.querySelectorAll('.chart-section, .bar-group').forEach(el => {
+  observer.observe(el);
+});
+
+// Smooth scroll for any anchor links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
