@@ -634,6 +634,46 @@ blockquote .source {
 }
 
 /* --- CTA --- */
+.formal-link {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--text-dim);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 8px 18px;
+  margin-top: 24px;
+  transition: color 0.3s, border-color 0.3s;
+}
+
+.formal-link:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.formal-link-btn {
+  display: inline-block;
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  color: white;
+  text-decoration: none;
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  padding: 14px 28px;
+  margin-top: 32px;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.formal-link-btn:hover {
+  background: #e0342b;
+  box-shadow: 0 0 30px rgba(255,59,48,0.25);
+}
+
 .cta-section {
   text-align: center;
   padding: 100px 24px;
@@ -802,6 +842,7 @@ a.source-link:hover {
   <h1>The Data <em>Gap</em></h1>
   <p class="hero-sub">The FBI's crime statistics systematically obscure Hispanic involvement in violent crime, inflate the "White" crime rate, and produce national data that is structurally misleading. Here's the evidence — and what needs to change.</p>
   <div class="hero-meta">Addressed to the CJIS Division &nbsp;·&nbsp; The CJIS Advisory Policy Board &nbsp;·&nbsp; The Director of the FBI</div>
+  <a href="open-letter-fbi-race-ethnicity-reporting.md" target="_blank" class="formal-link" style="opacity:0; animation: fadeUp 0.8s ease forwards 0.9s;">📄 Read the formal letter</a>
   <div class="scroll-hint">
     <span>Scroll</span>
     <div class="scroll-line"></div>
@@ -1122,6 +1163,7 @@ a.source-link:hover {
     <h2>The FBI's crime data is the most cited source on crime in the United States. Right now, it is systematically wrong about the nation's largest ethnic minority.</h2>
     <p>The OMB has determined the two-question framework is broken. The largest state and the largest city already report with Hispanic separated. The federal mandate is in place. The path is clear.</p>
     <p style="color: var(--text); font-weight: 500;">What remains is the will to act — and the urgency to act now, not in 2029.</p>
+    <a href="open-letter-fbi-race-ethnicity-reporting.md" target="_blank" class="formal-link-btn">📄 Read &amp; Share the Formal Letter</a>
   </div>
 </section>
 
