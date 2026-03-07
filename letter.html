@@ -427,6 +427,252 @@ ol.asks li:last-child { border-bottom: none; }
   border-color: #8b7355;
 }
 
+/* --- INLINE CHARTS --- */
+.chart-container {
+  margin: 28px 0 32px;
+  padding: 28px;
+  background: linear-gradient(135deg, rgba(184,164,126,0.04), rgba(184,164,126,0.01));
+  border: 1px solid #e0d8cc;
+  border-radius: 6px;
+}
+
+.chart-container .chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chart-container .chart-label {
+  font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #a09080;
+}
+
+.chart-toggle-letter {
+  display: inline-flex;
+  gap: 0;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #d4c4a0;
+}
+
+.chart-toggle-letter button {
+  padding: 5px 14px;
+  font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  background: transparent;
+  color: #a09080;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chart-toggle-letter button.active {
+  background: #5a4a3a;
+  color: #faf8f3;
+}
+
+.bar-pair-letter {
+  margin-bottom: 16px;
+}
+
+.bar-pair-letter .pair-label {
+  font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #3a2a1a;
+  margin-bottom: 4px;
+}
+
+.bar-row-letter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 3px;
+}
+
+.bar-row-letter .row-tag {
+  font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  width: 80px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.bar-row-letter .row-tag.arrest { color: #5a4a3a; }
+.bar-row-letter .row-tag.pop { color: #b85c3a; }
+
+.bar-track-letter {
+  flex: 1;
+  height: 20px;
+  background: rgba(0,0,0,0.03);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bar-fill-letter {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s ease;
+}
+
+/* FBI MODE for letter */
+.fbi-mode-letter .bar-pair-letter[data-race="hispanic"] {
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+#ca-letter-bars.fbi-mode-letter .bar-pair-letter[data-race="white"] {
+  order: -10;
+}
+
+.fbi-mode-letter {
+  display: flex;
+  flex-direction: column;
+}
+
+.fbi-mode-letter-banner {
+  font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #a04020;
+  background: rgba(200, 107, 58, 0.08);
+  border: 1px solid rgba(200, 107, 58, 0.2);
+  border-radius: 4px;
+  padding: 0;
+  margin-bottom: 0;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.4s ease, max-height 0.4s ease, padding 0.4s ease, margin 0.4s ease;
+}
+
+.fbi-mode-letter .fbi-mode-letter-banner {
+  opacity: 1;
+  max-height: 50px;
+  padding: 8px 14px;
+  margin-bottom: 14px;
+}
+
+.bar-fill-letter.hispanic { background: #d4943a; }
+.bar-fill-letter.black { background: #8b5cf6; }
+.bar-fill-letter.white { background: #4a6cf7; }
+.bar-fill-letter.asian { background: #eab308; }
+.bar-fill-letter.other { background: #eab308; }
+.bar-fill-letter.pop-bar { background: #9b2c2c; opacity: 0.85; }
+
+.bar-val-letter {
+  font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #3a2a1a;
+  width: 52px;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+.bar-val-letter.pop-val { color: #b85c3a; }
+
+.chart-legend-letter {
+  display: flex;
+  gap: 16px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+
+.chart-legend-letter .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  color: #a09080;
+}
+
+.chart-legend-letter .legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* --- INTERACTIVE HOVER EFFECTS --- */
+.chart-container {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.chart-container:hover {
+  border-color: #c4a87a;
+  box-shadow: 0 4px 24px rgba(90,74,58,0.08);
+}
+
+.bar-pair-letter {
+  padding-left: 8px;
+  border-left: 2px solid transparent;
+  transition: opacity 0.5s ease, max-height 0.5s ease, margin 0.4s ease, border-color 0.25s ease, background 0.25s ease;
+  max-height: 150px;
+  overflow: hidden;
+  border-radius: 3px;
+  cursor: default;
+}
+
+.bar-pair-letter:hover {
+  border-left-color: #5a4a3a;
+  background: rgba(90,74,58,0.03);
+}
+
+.bar-fill-letter {
+  position: relative;
+  cursor: default;
+}
+
+.bar-fill-letter[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3a2a1a;
+  color: #faf8f3;
+  font-family: 'Source Sans 3', Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 10;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.bar-fill-letter[data-tooltip]:hover::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: #3a2a1a;
+  pointer-events: none;
+  z-index: 10;
+}
+
 /* --- PRINT --- */
 @media print {
   body { font-size: 11pt; background: white; }
@@ -524,9 +770,104 @@ ol.asks li:last-child { border-bottom: none; }
   <div class="section-number">Section III</div>
   <h2>The Evidence: What Happens When You Separate the Data</h2>
 
-  <p>The strongest argument for changing the FBI's system is empirical. Multiple major jurisdictions already report crime data with Hispanic as a distinct racial/ethnic category. When they do, the picture changes fundamentally.</p>
+  <p>The strongest argument for changing the FBI's system is empirical. Remarkably, only 15 out of 50 states even report ethnicity in their arrest records. The vast majority of jurisdictions in America simply classify Hispanic arrestees as "White" and move on. But a handful of places — notably California and New York City — do separate the data. When they do, the picture changes fundamentally.</p>
 
-  <h3>A. New York City (NYPD)</h3>
+  <h3>A. California (Department of Justice)</h3>
+
+  <p>The California Department of Justice publishes annual "Crime in California" reports using four race/ethnic categories: White, Hispanic, Black, and Other. Table 31 (Felony Arrests by Race/Ethnic Group, 2024) reports the following for homicide:</p>
+
+  <div class="table-caption">California DOJ — Homicide Felony Arrests, 2024</div>
+  <table>
+    <thead>
+      <tr><th>Race/Ethnicity</th><th>Number</th><th>Percent</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Hispanic</td><td>629</td><td>48.2%</td></tr>
+      <tr><td>Black</td><td>389</td><td>29.8%</td></tr>
+      <tr><td><strong>White</strong></td><td><strong>212</strong></td><td><strong>16.2%</strong></td></tr>
+      <tr><td>Other</td><td>75</td><td>5.7%</td></tr>
+    </tbody>
+  </table>
+
+  <!-- California Interactive Chart -->
+  <div class="chart-container" id="ca-letter-chart">
+    <div class="chart-header">
+      <div class="chart-label">Arrests vs. Population Share</div>
+      <div class="chart-toggle-letter" id="ca-letter-toggle">
+        <button class="active" onclick="toggleCALetter('separated')">Separated</button>
+        <button onclick="toggleCALetter('fbi')">FBI Method</button>
+      </div>
+    </div>
+
+    <div id="ca-letter-bars">
+      <div class="fbi-mode-letter-banner">⚠ Under FBI coding, Hispanic arrests are absorbed into "White."</div>
+
+      <div class="bar-pair-letter" data-race="hispanic">
+        <div class="pair-label">Hispanic</div>
+        <div class="bar-row-letter">
+          <div class="row-tag arrest">Arrests</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter hispanic" data-tooltip="~629 arrests" style="width:48.2%"></div></div>
+          <div class="bar-val-letter">48.2%</div>
+        </div>
+        <div class="bar-row-letter">
+          <div class="row-tag pop">Population</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter pop-bar" data-tooltip="15,579,652 people" style="width:39.4%"></div></div>
+          <div class="bar-val-letter pop-val">39.4%</div>
+        </div>
+      </div>
+
+      <div class="bar-pair-letter" data-race="black">
+        <div class="pair-label">Black</div>
+        <div class="bar-row-letter">
+          <div class="row-tag arrest">Arrests</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter black" data-tooltip="~389 arrests" style="width:29.8%"></div></div>
+          <div class="bar-val-letter">29.8%</div>
+        </div>
+        <div class="bar-row-letter">
+          <div class="row-tag pop">Population</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter pop-bar" data-tooltip="2,135,038 people" style="width:5.4%"></div></div>
+          <div class="bar-val-letter pop-val">5.4%</div>
+        </div>
+      </div>
+
+      <div class="bar-pair-letter" data-race="white">
+        <div class="pair-label ca-letter-white-label">White (Non-Hispanic)</div>
+        <div class="bar-row-letter">
+          <div class="row-tag arrest">Arrests</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter white ca-letter-white-bar" data-tooltip="~211 arrests" style="width:16.2%"></div></div>
+          <div class="bar-val-letter ca-letter-white-val">16.2%</div>
+        </div>
+        <div class="bar-row-letter">
+          <div class="row-tag pop">Population</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter pop-bar" data-tooltip="13,714,587 people" style="width:34.7%"></div></div>
+          <div class="bar-val-letter pop-val">34.7%</div>
+        </div>
+      </div>
+
+      <div class="bar-pair-letter" data-race="other">
+        <div class="pair-label">Other</div>
+        <div class="bar-row-letter">
+          <div class="row-tag arrest">Arrests</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter other" data-tooltip="~74 arrests" style="width:5.7%"></div></div>
+          <div class="bar-val-letter">5.7%</div>
+        </div>
+        <div class="bar-row-letter">
+          <div class="row-tag pop">Population</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter pop-bar" data-tooltip="8,108,946 people" style="width:20.5%"></div></div>
+          <div class="bar-val-letter pop-val">20.5%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-legend-letter">
+      <div class="legend-item"><div class="legend-swatch" style="background:#5a4a3a"></div> Arrest share</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#9b2c2c; opacity:0.85;"></div> Population share (2020 Census, CA pop. 39,538,223)</div>
+    </div>
+  </div>
+
+  <p>Under the FBI's system, California's "White" figure would absorb the entire Hispanic total, producing a combined "White" figure of approximately <strong>64.4%</strong> — a number that bears no resemblance to the reality on the ground and would wildly misrepresent the racial/ethnic composition of homicide offending in the state.</p>
+
+  <h3>B. New York City (NYPD)</h3>
 
   <p>The New York City Police Department publishes annual enforcement reports that classify victims, suspects, and arrestees using five categories: American Indian, Asian/Pacific Islander, Black, White, and Hispanic. The NYPD explicitly notes that "Black and White used in tables and charts throughout this report therefore represent Black Non-Hispanic and White Non-Hispanic."</p>
 
@@ -545,31 +886,172 @@ ol.asks li:last-child { border-bottom: none; }
     </tbody>
   </table>
 
+  <!-- NYC Interactive Chart -->
+  <div class="chart-container" id="nyc-letter-chart">
+    <div class="chart-header">
+      <div class="chart-label">Arrestees vs. Population Share</div>
+      <div class="chart-toggle-letter" id="nyc-letter-toggle">
+        <button class="active" onclick="toggleNYCLetter('separated')">Separated</button>
+        <button onclick="toggleNYCLetter('fbi')">FBI Method</button>
+      </div>
+    </div>
+
+    <div id="nyc-letter-bars">
+      <div class="fbi-mode-letter-banner">⚠ Under FBI coding, Hispanic arrests are absorbed into "White."</div>
+
+      <div class="bar-pair-letter" data-race="black">
+        <div class="pair-label">Black</div>
+        <div class="bar-row-letter">
+          <div class="row-tag arrest">Arrests</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter black" data-tooltip="~151 arrests" style="width:60.2%"></div></div>
+          <div class="bar-val-letter">60.2%</div>
+        </div>
+        <div class="bar-row-letter">
+          <div class="row-tag pop">Population</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter pop-bar" data-tooltip="1,778,446 people" style="width:20.2%"></div></div>
+          <div class="bar-val-letter pop-val">20.2%</div>
+        </div>
+      </div>
+
+      <div class="bar-pair-letter" data-race="hispanic">
+        <div class="pair-label">Hispanic</div>
+        <div class="bar-row-letter">
+          <div class="row-tag arrest">Arrests</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter hispanic" data-tooltip="~80 arrests" style="width:32.1%"></div></div>
+          <div class="bar-val-letter">32.1%</div>
+        </div>
+        <div class="bar-row-letter">
+          <div class="row-tag pop">Population</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter pop-bar" data-tooltip="2,526,802 people" style="width:28.7%"></div></div>
+          <div class="bar-val-letter pop-val">28.7%</div>
+        </div>
+      </div>
+
+      <div class="bar-pair-letter" data-race="white">
+        <div class="pair-label nyc-letter-white-label">White (Non-Hispanic)</div>
+        <div class="bar-row-letter">
+          <div class="row-tag arrest">Arrests</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter white nyc-letter-white-bar" data-tooltip="~9 arrests" style="width:3.6%"></div></div>
+          <div class="bar-val-letter nyc-letter-white-val">3.6%</div>
+        </div>
+        <div class="bar-row-letter">
+          <div class="row-tag pop">Population</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter pop-bar" data-tooltip="2,720,592 people" style="width:30.9%"></div></div>
+          <div class="bar-val-letter pop-val">30.9%</div>
+        </div>
+      </div>
+
+      <div class="bar-pair-letter" data-race="asian">
+        <div class="pair-label">Asian / Pacific Islander</div>
+        <div class="bar-row-letter">
+          <div class="row-tag arrest">Arrests</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter asian" data-tooltip="~10 arrests" style="width:4.1%"></div></div>
+          <div class="bar-val-letter">4.1%</div>
+        </div>
+        <div class="bar-row-letter">
+          <div class="row-tag pop">Population</div>
+          <div class="bar-track-letter"><div class="bar-fill-letter pop-bar" data-tooltip="1,373,502 people" style="width:15.6%"></div></div>
+          <div class="bar-val-letter pop-val">15.6%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-legend-letter">
+      <div class="legend-item"><div class="legend-swatch" style="background:#5a4a3a"></div> Arrest share</div>
+      <div class="legend-item"><div class="legend-swatch" style="background:#9b2c2c; opacity:0.85;"></div> Population share (2020 Census, NYC pop. 8,804,190)</div>
+    </div>
+  </div>
+
   <p>The critical figure: <strong>White (non-Hispanic) individuals accounted for just 3.6% of murder arrestees in New York City.</strong> Under the FBI's system, many of those Hispanic arrestees — 32.1% of the total — would be coded as "White" in the race field, inflating the White share by nearly tenfold.</p>
-
-  <h3>B. California (Department of Justice)</h3>
-
-  <p>The California Department of Justice publishes annual "Crime in California" reports using four race/ethnic categories: White, Hispanic, Black, and Other. Table 31 (Felony Arrests by Race/Ethnic Group, 2024) reports the following for homicide:</p>
-
-  <div class="table-caption">California DOJ — Homicide Felony Arrests, 2024</div>
-  <table>
-    <thead>
-      <tr><th>Race/Ethnicity</th><th>Number</th><th>Percent</th></tr>
-    </thead>
-    <tbody>
-      <tr><td>Hispanic</td><td>629</td><td>48.2%</td></tr>
-      <tr><td>Black</td><td>389</td><td>29.8%</td></tr>
-      <tr><td><strong>White</strong></td><td><strong>212</strong></td><td><strong>16.2%</strong></td></tr>
-      <tr><td>Other</td><td>75</td><td>5.7%</td></tr>
-    </tbody>
-  </table>
-
-  <p>Under the FBI's system, California's "White" figure would absorb the entire Hispanic total, producing a combined "White" figure of approximately <strong>64.4%</strong> — a number that bears no resemblance to the reality on the ground and would wildly misrepresent the racial/ethnic composition of homicide offending in the state.</p>
 
   <div class="divider"></div>
 
-  <!-- SECTION IV -->
+  <!-- SECTION IV: REAL-WORLD CONSEQUENCES -->
   <div class="section-number">Section IV</div>
+  <h2>How Bad Data Becomes Bad Policy</h2>
+
+  <p>This classification problem is not confined to the FBI's arrest tables. The Federal Bureau of Prisons publishes inmate statistics on its website — but race and ethnicity are on <strong>two completely separate pages</strong>. A visitor to the Race page sees only this:</p>
+
+  <p style="font-family:'Source Sans 3', sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#a09080; margin-bottom:6px; margin-top:24px;">Step 1 — BOP "Inmate Race" page (bop.gov)</p>
+  <div style="display:flex; gap:10px; margin:0 0 20px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:100px; background:rgba(184,164,126,0.04); border:1px solid #e0d8cc; border-radius:6px; padding:12px 8px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">Asian</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:22px; font-weight:700; color:#a09080;">1.6%</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; color:#a09080; margin-top:3px;">2,472</div>
+    </div>
+    <div style="flex:1; min-width:100px; background:rgba(184,164,126,0.04); border:1px solid #e0d8cc; border-radius:6px; padding:12px 8px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">Black</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:22px; font-weight:700; color:#8b5cf6;">38.4%</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; color:#a09080; margin-top:3px;">58,680</div>
+    </div>
+    <div style="flex:1; min-width:100px; background:rgba(184,164,126,0.04); border:1px solid #e0d8cc; border-radius:6px; padding:12px 8px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">Native American</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:22px; font-weight:700; color:#22c55e;">3.0%</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; color:#a09080; margin-top:3px;">4,604</div>
+    </div>
+    <div style="flex:1; min-width:100px; background:rgba(184,164,126,0.04); border:1px solid rgba(74,108,247,0.3); border-radius:6px; padding:12px 8px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">"White"</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:22px; font-weight:700; color:#4a6cf7;">57.0%</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; color:#a09080; margin-top:3px;">87,024</div>
+    </div>
+  </div>
+
+  <p>This is what gets screenshotted, shared on social media, and cited in viral videos. It tells a simple story: the majority of federal inmates are White. No mention of Hispanic anywhere on this page.</p>
+  <p style="text-align:center; margin:16px 0;"><a href="https://www.bop.gov/about/statistics/statistics_inmate_race.jsp" target="_blank" style="display:inline-block; padding:10px 24px; background:#b85c3a; color:white; font-family:'Source Sans 3', sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; border-radius:6px; border:2px solid #b85c3a;">→ Prove it to yourself — see the BOP Race page</a></p>
+
+  <p>But the BOP also publishes ethnicity data — on a completely separate page that most visitors never see:</p>
+
+  <p style="font-family:'Source Sans 3', sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#b85c3a; margin-bottom:6px; margin-top:24px;">Step 2 — BOP "Inmate Ethnicity" page (separate page on bop.gov)</p>
+  <div style="display:flex; gap:10px; margin:0 0 20px; flex-wrap:wrap; max-width:380px;">
+    <div style="flex:1; min-width:140px; background:rgba(184,92,58,0.06); border:1px solid rgba(184,92,58,0.3); border-radius:6px; padding:14px 10px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#b85c3a; margin-bottom:6px;">Hispanic</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:24px; font-weight:700; color:#d4943a;">29.5%</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; color:#b85c3a; margin-top:3px;">45,109 inmates</div>
+    </div>
+    <div style="flex:1; min-width:140px; background:rgba(184,164,126,0.04); border:1px solid #e0d8cc; border-radius:6px; padding:14px 10px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:2px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">Non-Hispanic</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:24px; font-weight:700; color:#a09080;">70.5%</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; color:#a09080; margin-top:3px;">107,671 inmates</div>
+    </div>
+  </div>
+
+  <p>Those 45,109 Hispanic inmates? On the Race page, they are counted as "White." Two pages on the same government website tell two completely different stories.</p>
+  <p style="text-align:center; margin:16px 0;"><a href="https://www.bop.gov/about/statistics/statistics_inmate_ethnicity.jsp" target="_blank" style="display:inline-block; padding:10px 24px; background:#b85c3a; color:white; font-family:'Source Sans 3', sans-serif; font-size:12px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; text-decoration:none; border-radius:6px; border:2px solid #b85c3a;">→ Prove it to yourself — see the BOP Ethnicity page</a></p>
+
+  <p style="font-family:'Source Sans 3', sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#5a7a5a; margin-bottom:6px; margin-top:24px;">Step 3 — The real picture (all groups separated)</p>
+  <div style="display:flex; gap:10px; margin:0 0 20px; flex-wrap:wrap;">
+    <div style="flex:1; min-width:85px; background:rgba(184,164,126,0.04); border:1px solid #e0d8cc; border-radius:6px; padding:12px 6px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">Black</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:20px; font-weight:700; color:#8b5cf6;">38.4%</div>
+    </div>
+    <div style="flex:1; min-width:85px; background:rgba(184,164,126,0.04); border:1px solid rgba(212,148,58,0.3); border-radius:6px; padding:12px 6px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">Hispanic</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:20px; font-weight:700; color:#d4943a;">29.5%</div>
+    </div>
+    <div style="flex:1; min-width:85px; background:rgba(184,164,126,0.04); border:1px solid rgba(74,108,247,0.3); border-radius:6px; padding:12px 6px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">White (NH)</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:20px; font-weight:700; color:#4a6cf7;">~27.5%</div>
+    </div>
+    <div style="flex:1; min-width:85px; background:rgba(184,164,126,0.04); border:1px solid #e0d8cc; border-radius:6px; padding:12px 6px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">Nat. Amer.</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:20px; font-weight:700; color:#22c55e;">3.0%</div>
+    </div>
+    <div style="flex:1; min-width:85px; background:rgba(184,164,126,0.04); border:1px solid #e0d8cc; border-radius:6px; padding:12px 6px; text-align:center;">
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:9px; letter-spacing:1.5px; text-transform:uppercase; color:#a09080; margin-bottom:6px;">Asian</div>
+      <div style="font-family:'Source Sans 3', sans-serif; font-size:20px; font-weight:700; color:#a09080;">1.6%</div>
+    </div>
+  </div>
+
+  <p style="background:rgba(184,164,126,0.06); border-left:3px solid #b85c3a; padding:16px 20px; border-radius:0 6px 6px 0; font-family:'Source Sans 3', sans-serif; font-size:13px; line-height:1.7;"><strong>The math:</strong> &nbsp; 87,024 "White" &minus; 45,109 Hispanic = <strong>41,915 non-Hispanic White</strong> (~27.5%). White Americans are not the majority of federal inmates. They are the <strong>third-largest group</strong> — behind both Black and Hispanic.</p>
+
+  <p style="font-family:'Source Sans 3', sans-serif; font-size:11px; color:#a09080; line-height:1.6;">Data last updated February 28, 2026. Total: 152,780 federal inmates. Sources linked above.</p>
+
+  <p>This distortion does not serve any political side. It misleads everyone — those who would minimize racial disparities and those who would exaggerate them. It produces a world in which no one can have an honest conversation about crime, because the foundational numbers are wrong.</p>
+
+  <div class="divider"></div>
+
+  <!-- SECTION V -->
+  <div class="section-number">Section V</div>
   <h2>The OMB Has Already Mandated This Change</h2>
 
   <p>On March 28, 2024, the Office of Management and Budget published revisions to Statistical Policy Directive No. 15 — the first major update since 1997. The revised standard requires all federal agencies to:</p>
@@ -587,8 +1069,8 @@ ol.asks li:last-child { border-bottom: none; }
 
   <div class="divider"></div>
 
-  <!-- SECTION V -->
-  <div class="section-number">Section V</div>
+  <!-- SECTION VI -->
+  <div class="section-number">Section VI</div>
   <h2>The Cost of Inaction</h2>
 
   <p>Every year the FBI continues to publish crime data under the old framework, the following harms accumulate:</p>
@@ -603,8 +1085,8 @@ ol.asks li:last-child { border-bottom: none; }
 
   <div class="divider"></div>
 
-  <!-- SECTION VI -->
-  <div class="section-number">Section VI</div>
+  <!-- SECTION VII -->
+  <div class="section-number">Section VII</div>
   <h2>What We Are Asking</h2>
 
   <p>We respectfully request that the FBI's CJIS Division take the following actions:</p>
@@ -620,8 +1102,8 @@ ol.asks li:last-child { border-bottom: none; }
 
   <div class="divider"></div>
 
-  <!-- SECTION VII -->
-  <div class="section-number">Section VII</div>
+  <!-- SECTION VIII -->
+  <div class="section-number">Section VIII</div>
   <h2>Conclusion</h2>
 
   <p>The FBI's crime data is the most widely cited source on crime in the United States. It informs academic research, media coverage, legislative action, and public understanding. When that data systematically obscures the role of the nation's largest ethnic minority in crime — both as offenders and as victims — it fails everyone.</p>
@@ -649,6 +1131,8 @@ ol.asks li:last-child { border-bottom: none; }
       <li><strong>California Department of Justice, Crime in California (2024)</strong> — Table 31, Felony Arrests by Race/Ethnic Group<br><a href="https://data-openjustice.doj.ca.gov/sites/default/files/2025-07/Crime%20In%20CA%202024%20final.pdf" target="_blank">data-openjustice.doj.ca.gov (PDF)</a></li>
       <li><strong>Office of Management and Budget, Revised SPD 15 (March 28, 2024)</strong> — Federal Register, 89 FR 22182<br><a href="https://www.federalregister.gov/documents/2024/03/29/2024-06469/revisions-to-ombs-statistical-policy-directive-no-15-standards-for-maintaining-collecting-and" target="_blank">federalregister.gov</a></li>
       <li><strong>U.S. Census Bureau (2024)</strong> — Updates to OMB's Race/Ethnicity Standards<br><a href="https://www.census.gov/newsroom/blogs/random-samplings/2024/04/updates-race-ethnicity-standards.html" target="_blank">census.gov</a></li>
+      <li><strong>Federal Bureau of Prisons — Inmate Race Statistics</strong><br><a href="https://www.bop.gov/about/statistics/statistics_inmate_race.jsp" target="_blank">bop.gov — Inmate Race</a></li>
+      <li><strong>Federal Bureau of Prisons — Inmate Ethnicity Statistics</strong><br><a href="https://www.bop.gov/about/statistics/statistics_inmate_ethnicity.jsp" target="_blank">bop.gov — Inmate Ethnicity</a></li>
     </ul>
   </div>
 
@@ -657,5 +1141,54 @@ ol.asks li:last-child { border-bottom: none; }
   </div>
 
 </div>
+
+<script>
+function toggleNYCLetter(mode) {
+  var btns = document.querySelectorAll('#nyc-letter-toggle button');
+  btns.forEach(function(b) { b.classList.remove('active'); });
+  var container = document.getElementById('nyc-letter-bars');
+  var whiteBar = container.querySelector('.nyc-letter-white-bar');
+  var whiteLabel = container.querySelector('.nyc-letter-white-label');
+  var whiteVal = container.querySelector('.nyc-letter-white-val');
+
+  if (mode === 'fbi') {
+    btns[1].classList.add('active');
+    container.classList.add('fbi-mode-letter');
+    whiteBar.style.width = '35.7%';
+    whiteLabel.textContent = '"White" (FBI Coding)';
+    whiteVal.textContent = '35.7%';
+  } else {
+    btns[0].classList.add('active');
+    container.classList.remove('fbi-mode-letter');
+    whiteBar.style.width = '3.6%';
+    whiteLabel.textContent = 'White (Non-Hispanic)';
+    whiteVal.textContent = '3.6%';
+  }
+}
+
+function toggleCALetter(mode) {
+  var btns = document.querySelectorAll('#ca-letter-toggle button');
+  btns.forEach(function(b) { b.classList.remove('active'); });
+  var container = document.getElementById('ca-letter-bars');
+  var whiteBar = container.querySelector('.ca-letter-white-bar');
+  var whiteLabel = container.querySelector('.ca-letter-white-label');
+  var whiteVal = container.querySelector('.ca-letter-white-val');
+
+  if (mode === 'fbi') {
+    btns[1].classList.add('active');
+    container.classList.add('fbi-mode-letter');
+    whiteBar.style.width = '64.4%';
+    whiteLabel.textContent = '"White" (FBI Coding)';
+    whiteVal.textContent = '64.4%';
+  } else {
+    btns[0].classList.add('active');
+    container.classList.remove('fbi-mode-letter');
+    whiteBar.style.width = '16.2%';
+    whiteLabel.textContent = 'White (Non-Hispanic)';
+    whiteVal.textContent = '16.2%';
+  }
+}
+</script>
+
 </body>
 </html>
